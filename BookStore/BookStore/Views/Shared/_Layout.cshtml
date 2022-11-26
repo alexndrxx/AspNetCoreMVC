@@ -34,6 +34,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="/home/contactus">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/book/getallbooks">Books</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -42,6 +45,12 @@
     <main role="main">
         @RenderBody()
     </main>
+    <footer class="border-top footer text-muted text-center"> 
+        <div class=container>
+            Copyright &copy BookStore @DateTime.Now.Year
+        </div>
+    </footer>
+    <srcipt src="~\lib\jquery\jquery.js"></srcipt>  
 </body>
 </html>
 
