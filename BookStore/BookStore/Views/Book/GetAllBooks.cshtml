@@ -3,13 +3,9 @@
 @{
     Layout = "_Layout";
 }
-
-
-
 <div class="container">
     <h3 class="display-5">All Books</h3>
     <div class="row">
-
        @foreach (var book in Model)
        {
             <div class="col-md-4">
@@ -28,6 +24,17 @@
                 </div>
             </div>
        }
-        
     </div>
 </div>
+
+@section breadcrumb{
+    <div class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Page</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Books</li>
+          </ol>
+        </nav>
+    </div>
+}

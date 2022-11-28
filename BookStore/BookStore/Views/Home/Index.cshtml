@@ -63,3 +63,23 @@
         </div>
     </div>
 </div>
+
+@section breadcrumb{
+    <div class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Page</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Index</li>
+          </ol>
+        </nav>
+    </div>
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function(){
+        alert("document is ready")
+        });
+    </script>
+}
