@@ -1,24 +1,24 @@
 ﻿body {
 }
 
-.logo{
-    height:100px;
-    width:100px;
+.logo {
+    height: 100px;
+    width: 100px;
 }
 
-.jumbotron{
+.jumbotron {
     background: none;
 }
 
 
 /* Sticky footer styles*/
 
-html{
+html {
     position: relative;
-    min-height:100%;
+    min-height: 100%;
 }
 
-body{
+body {
     margin-bottom: 60px;
 }
 
