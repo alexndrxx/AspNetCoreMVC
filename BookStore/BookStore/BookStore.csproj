@@ -4,13 +4,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="wwwroot\lib\bootstrap\**" />
-    <Content Remove="wwwroot\lib\bootstrap\**" />
-    <EmbeddedResource Remove="wwwroot\lib\bootstrap\**" />
-    <None Remove="wwwroot\lib\bootstrap\**" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.30" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5"></PackageReference>
