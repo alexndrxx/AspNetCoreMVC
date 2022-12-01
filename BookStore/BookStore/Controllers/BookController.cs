@@ -16,6 +16,8 @@ namespace BookStore.Controllers
         {
             _repository = new BookRepository();
         }
+
+        [Route("all-books", Name = "allBooksRoute")]
         public ViewResult GetAllBooks()
         {
             var data = _repository.DataSource();
@@ -23,7 +25,8 @@ namespace BookStore.Controllers
             return View(data);
         }
 
-        public ViewResult GetBook(int id)
+        [Route("book-details/{id}", Name = "bookDetailsRoute")]
+        public ViewResult GetBook(int id, string bookName)
         {
             var data = _repository.GetBookById(id);
             Title = "Book "+data.Title+" | BookStore";
@@ -33,6 +36,20 @@ namespace BookStore.Controllers
         public List<BookModel> SearchBooks(string bookName, string authorName)
         {
             return _repository.SearchBooks(bookName, authorName);
+        }
+
+        //Route("adding-book", Name = "AddNewBookRoute")]
+        public ViewResult AddNewBook()
+        {
+            Title = "Adding book | BookStore";
+            return View();
+        }
+
+        [HttpPost]
+        public bool AddNewBook(BookModel bookModel)
+        {
+            System.Console.WriteLine("Added book");
+            return true;
         }
     }
 }
