@@ -19,10 +19,13 @@
 		<div class="form-group">
 			<label asp-for="Title"></label>
 			<input asp-for="Title" type="text" class="form-control" />
+			<span asp-validation-for="Title" class="text-danger"></span>
 		</div>
 		<div class="form-group">
 			<label asp-for="Author" class="col-form-label"></label>
 			<input asp-for="Author" type="text" class="form-control" />
+			<span asp-validation-for="Author" class="text-danger"></span>
+
 		</div>
 		<div class="form-group">
 			<label asp-for="Category" class="col-form-label"></label>
@@ -31,6 +34,7 @@
 		<div class="form-group">
 			<label asp-for="Language" class="col-form-label"></label>
 			<input asp-for="Language" type="text" class="form-control" />
+
 		</div>
 		<div class="form-group">
 			<label asp-for="Description"></label>
@@ -39,6 +43,7 @@
 		<div class="form-group">
 			<label asp-for="TotalPages"></label>
 			<input asp-for="TotalPages" type="number" class="form-control" />
+			<span asp-validation-for="TotalPages" class="text-danger"></span>
 		</div>
 		<div class="form-group">
 			<input type="submit" value="Add book" class="btn btn-primary" />
