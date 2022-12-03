@@ -2,6 +2,7 @@
 using BookStore.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
@@ -12,44 +13,52 @@ namespace BookStore.Controllers
 
         private readonly BookRepository _repository = null;
 
-        public BookController()
+        public BookController(BookRepository bookRepository)
         {
-            _repository = new BookRepository();
+            _repository = bookRepository;
         }
 
         [Route("all-books", Name = "allBooksRoute")]
-        public ViewResult GetAllBooks()
+        public async Task<ViewResult> GetAllBooks()
         {
-            var data = _repository.DataSource();
+            var data = await _repository.GetAllBooks();
             Title = "All books | BookStore";
             return View(data);
         }
 
         [Route("book-details/{id}", Name = "bookDetailsRoute")]
-        public ViewResult GetBook(int id, string bookName)
+        public async Task<ViewResult> GetBook(int id, string bookName)
         {
-            var data = _repository.GetBookById(id);
+            var data = await _repository.GetBookById(id);
             Title = "Book "+data.Title+" | BookStore";
             return View(data);
         }
 
-        public List<BookModel> SearchBooks(string bookName, string authorName)
-        {
-            return _repository.SearchBooks(bookName, authorName);
-        }
+        //public List<BookModel> SearchBooks(string bookName, string authorName)
+        //{
+        //    return _repository.SearchBooks(bookName, authorName);
+        //}
 
-        //Route("adding-book", Name = "AddNewBookRoute")]
-        public ViewResult AddNewBook()
+        //[Route("adding-book", Name = "AddNewBookRoute")]
+        public ViewResult AddNewBook(bool IsSuccess = false, int bookId = 0)
         {
             Title = "Adding book | BookStore";
+            ViewBag.IsSuccess = IsSuccess;
+            ViewBag.BookId = bookId;
             return View();
         }
 
         [HttpPost]
-        public bool AddNewBook(BookModel bookModel)
+        public async Task<IActionResult> AddNewBook(BookModel bookModel)
         {
-            System.Console.WriteLine("Added book");
-            return true;
+            int id = await _repository.AddNewBook(bookModel);
+            
+            if(id > 0)
+            {
+                return RedirectToAction("AddNewBook","Book", new { IsSuccess = true, bookId = id }) ;
+            }
+
+            return View();
         }
     }
 }
