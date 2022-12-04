@@ -12,7 +12,7 @@ namespace BookStore.Data
 
         public string Description { get; set; }
 
-        public string Language { get; set; }
+        public int LanguageId { get; set; }
 
         public string TotalPages { get; set; }
 
@@ -22,5 +22,6 @@ namespace BookStore.Data
 
         public DateTime? UpdatedOn { get; set; }
 
+        public Language Language { get; set; }
     }
 }

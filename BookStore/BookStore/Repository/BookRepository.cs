@@ -25,7 +25,7 @@ namespace BookStore.Repository
                 Category = model.Category,
                 Description = model.Description,
                 TotalPages = model.TotalPages,
-                Language = model.Language,
+                LanguageId = model.LanguageId,
                 UpdatedOn = System.DateTime.UtcNow,
                 CreatedOn = System.DateTime.UtcNow
             };
@@ -37,20 +37,18 @@ namespace BookStore.Repository
 
         public async Task<BookModel> GetBookById(int id)
         {
-            var findBook = await _context.Books.FirstOrDefaultAsync(p => p.Id == id);
-            if (findBook != null)
-                return new BookModel
+            return await _context.Books.Where(p => p.Id == id)
+                .Select(book => new BookModel()
                 {
-                    Title = findBook.Title,
-                    Author = findBook.Author,
-                    Description = findBook.Description,
-                    Id = findBook.Id,
-                    Language = findBook.Language,
-                    TotalPages = findBook.TotalPages,
-                    Category = findBook.Category
-                };
-            else
-                return null;
+                    Title = book.Title,
+                    Author = book.Author,
+                    Description = book.Description,
+                    Id = book.Id,
+                    LanguageId = book.LanguageId,
+                    Language = book.Language.Name,
+                    TotalPages = book.TotalPages,
+                    Category = book.Category
+                }).FirstOrDefaultAsync();
         }
 
         //public List<BookModel> SearchBooks(string authorName, string bookName)
@@ -58,25 +56,20 @@ namespace BookStore.Repository
         //    return DataSource().Where(x => x.Author == authorName || x.Title == bookName).ToList();
         //}
 
-        public async Task<List<BookModel>>  GetAllBooks()
+        public async Task<List<BookModel>> GetAllBooks()
         {
-            List<BookModel> books = new List<BookModel>();
-            var allbooks = await _context.Books.ToListAsync();
-
-            foreach(var book in allbooks)
-            {
-                books.Add(new BookModel
-                {
-                    Title = book.Title,
-                    Author = book.Author,
-                    Description = book.Description,
-                    Id = book.Id,
-                    Language = book.Language,
-                    TotalPages = book.TotalPages,
-                    Category=book.Category,
-                });
-            }
-            return books;
+            return await _context.Books
+                  .Select(book => new BookModel()
+                  {
+                      Author = book.Author,
+                      Category = book.Category,
+                      Description = book.Description,
+                      Id = book.Id,
+                      LanguageId = book.LanguageId,
+                      Language = book.Language.Name,
+                      Title = book.Title,
+                      TotalPages = book.TotalPages,
+                  }).ToListAsync();
         }
     }
 }
