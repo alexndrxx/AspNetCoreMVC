@@ -14,3 +14,6 @@
 /BookStore/BookStore/wwwroot/images/book2.jpg
 /BookStore/BookStore/wwwroot/images/book3.jpg
 /BookStore/BookStore/bin/Debug/net6.0
+/BookStore/BookStore/wwwroot/lib/jquery-ajax-unobtrusive
+/BookStore/BookStore/wwwroot/lib/jquery-validation-unobtrusive
+/BookStore/BookStore/wwwroot/lib/jquery-validate

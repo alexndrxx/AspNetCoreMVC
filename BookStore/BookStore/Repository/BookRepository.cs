@@ -27,8 +27,21 @@ namespace BookStore.Repository
                 TotalPages = model.TotalPages,
                 LanguageId = model.LanguageId,
                 UpdatedOn = System.DateTime.UtcNow,
-                CreatedOn = System.DateTime.UtcNow
+                CreatedOn = System.DateTime.UtcNow,
+                CoverImageUrl = model.CoverImageUrl,
+                BookPdfUrl = model.BookPdfUrl,
             };
+
+            newBook.bookGallery = new List<BookGallery>();
+            
+            foreach (var file in model.Gallery)
+            {
+                newBook.bookGallery.Add(new BookGallery()
+                {
+                    Name = file.Name,
+                    URL = file.URL,
+                });
+            }
 
             await _context.Books.AddAsync(newBook);
             await _context.SaveChangesAsync();
@@ -47,7 +60,15 @@ namespace BookStore.Repository
                     LanguageId = book.LanguageId,
                     Language = book.Language.Name,
                     TotalPages = book.TotalPages,
-                    Category = book.Category
+                    Category = book.Category,
+                    CoverImageUrl = book.CoverImageUrl,
+                    BookPdfUrl = book.BookPdfUrl,
+                    Gallery = book.bookGallery.Select(g => new GalleryModel()
+                    {
+                        Id = g.Id,
+                        Name = g.Name,
+                        URL = g.URL,
+                    }).ToList()
                 }).FirstOrDefaultAsync();
         }
 
@@ -69,7 +90,27 @@ namespace BookStore.Repository
                       Language = book.Language.Name,
                       Title = book.Title,
                       TotalPages = book.TotalPages,
+                      CoverImageUrl = book.CoverImageUrl,
+                      BookPdfUrl = book.BookPdfUrl,
                   }).ToListAsync();
+        }
+
+        public async Task<List<BookModel>> GetTopBooksAsync(int count)
+        {
+            return await _context.Books
+                  .Select(book => new BookModel()
+                  {
+                      Author = book.Author,
+                      Category = book.Category,
+                      Description = book.Description,
+                      Id = book.Id,
+                      LanguageId = book.LanguageId,
+                      Language = book.Language.Name,
+                      Title = book.Title,
+                      TotalPages = book.TotalPages,
+                      CoverImageUrl = book.CoverImageUrl,
+                      BookPdfUrl = book.BookPdfUrl,
+                  }).Take(count).ToListAsync();
         }
     }
 }

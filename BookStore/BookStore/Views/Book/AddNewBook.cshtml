@@ -19,7 +19,7 @@
 		</div>
 	}
 
-	<form method="post" asp-action="AddNewBook" asp-controller="Book">
+	<form method="post" enctype="multipart/form-data" asp-action="AddNewBook" asp-controller="Book">
 		<div class="form-group">
 			<label asp-for="Title"></label>
 			<input asp-for="Title" type="text" class="form-control" />
@@ -36,9 +36,7 @@
 		</div>
 		<div class="form-group">
 			<label asp-for="LanguageId" class="col-form-label"></label>
-			<select asp-for="LanguageId" class="form-control" asp-items="ViewBag.Language">
-				<option value = "">Please choose the language</option>
-			</select>
+			<select asp-for="LanguageId" class="form-control" asp-items="ViewBag.Language"></select>
 			<span asp-validation-for="LanguageId" class="text-danger"></span>
 		</div>
 		<div class="form-group">
@@ -49,6 +47,38 @@
 			<label asp-for="TotalPages"></label>
 			<input asp-for="TotalPages" type="number" class="form-control" />
 			<span asp-validation-for="TotalPages" class="text-danger"></span>
+		</div>
+
+		<div class="form-group">
+			<label asp-for="CoverPhoto" class="control-label"></label>
+			<div class="custom-file">
+				<input asp-for="CoverPhoto" type="file" class="custom-file-input" id="customFile">
+				<label class="custom-file-label">Choose file</label>
+				<span asp-validation-for="CoverPhoto" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label asp-for="GalleryFiles" class="control-label"></label>
+			<div class="custom-file">
+				<input asp-for="GalleryFiles" type="file" class="custom-file-input" id="customFile" multiple>
+				<label class="custom-file-label">Choose file</label>
+				<span asp-validation-for="GalleryFiles" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label asp-for="BookPdf" class="control-label"></label>
+			<div class="custom-file">
+				<input asp-for="BookPdf" type="file" class="custom-file-input" id="customFile" multiple>
+				<label class="custom-file-label">Choose file</label>
+				<span asp-validation-for="BookPdf" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="input-group">
+			</div>
 		</div>
 		<div class="form-group">
 			<input type="submit" value="Add book" class="btn btn-primary" />

@@ -20,13 +20,13 @@ namespace BookStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BookStoreContext>(
-                options=>options.UseSqlServer("Server=.;Database=BookStore;Integrated Security=True"));
+                options => options.UseSqlServer("Server=.;Database=BookStore;Integrated Security=True"));
 
             services.AddControllersWithViews();
 
-            //#if DEBUG
+//#if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            //#endif
+//#endif
 
             services.AddScoped<BookRepository, BookRepository>();
 
